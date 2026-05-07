@@ -71,8 +71,8 @@ class GeneExpressionOmnibus:
 class DefaultPaths:
     """Default paths used for data storage."""
 
-    DISSOCIATED = "/lustre/groups/ml01/projects/2023_nicheformer_data_anna.schaar/dissociated"
-    SPATIAL = "/lustre/groups/ml01/projects/2023_nicheformer_data_anna.schaar/spatial"
+    DISSOCIATED = "/mnt/172/wh/25-12/dissociated"
+    SPATIAL = "/mnt/172/wh/25-12/spatial"
 
 
 class ObsConstants:

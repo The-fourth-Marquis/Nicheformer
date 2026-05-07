@@ -57,6 +57,16 @@ adata.var[VarConstants.FEATURE_IS_FILTERED] = False
 
 adata.obs[ObsConstants.LIBRARY_KEY] = pd.Categorical(['section' for i in range(len(adata))])
 
+# missing QC
+# Convert X to float32 CSR matrix (required by CELLxGENE validator for raw data)
+adata.X = csr_matrix(adata.X, dtype=np.float32)
+
+# Filter out cells with zero counts across all genes (required by CELLxGENE validator)
+sc.pp.filter_cells(adata, min_genes=1)
+# logger.info(f"Cells after filtering zero-count cells: {adata.n_obs}")
+
+# Set raw data so the CELLxGENE validator finds raw counts in adata.raw.X
+adata.raw = adata
 adata_output, valid, errors, is_seurat_convertible = validate(adata, organism=organism_validator)
 
 adata_output.obs['assay'] = pd.Categorical(['Xenium' for i in range(len(adata_output))])
