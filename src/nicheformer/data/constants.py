@@ -73,6 +73,7 @@ class DefaultPaths:
 
     DISSOCIATED = "/mnt/172/wh/25-12/dissociated"
     SPATIAL = "/mnt/172/wh/25-12/spatial"
+    MODEL_MEANS = "/root/code/25-12/nicheformer/data/model_means"
 
 
 class ObsConstants:

@@ -1,6 +1,6 @@
-from models._nicheformer import Nicheformer
-from models._fine_tune_model import FineTuningModel
-from data.datamodules import MerlinDataModuleDistributed
+from .models._nicheformer import Nicheformer
+from .models._fine_tune_model import FineTuningModel
+from .data.datamodules import MerlinDataModuleDistributed
 import pytorch_lightning as pl
 from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning.callbacks import ModelCheckpoint, LearningRateMonitor

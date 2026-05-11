@@ -111,6 +111,12 @@ class NicheformerDataset(Dataset):
             gc.collect()  # force garbage collection
 
         # Concatenate all chunks
+        if len(tokens_list) == 0:
+            raise ValueError(
+                f"No cells found for split='{self.adata.obs['nicheformer_split'].iloc[0] if len(self.adata.obs) > 0 else 'unknown'}'. "
+                f"The adata has {len(self.adata)} cells after filtering. "
+                f"Available splits: {self.adata.obs['nicheformer_split'].value_counts().to_dict() if 'nicheformer_split' in self.adata.obs else 'N/A'}"
+            )
         self.tokens = np.concatenate(tokens_list, axis=0)
 
     def _process_chunk(self, start_idx, end_idx):
