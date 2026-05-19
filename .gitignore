@@ -1,2 +1,4 @@
 /ckpt
 **/__pycache__
+/.venv
+**.csv
