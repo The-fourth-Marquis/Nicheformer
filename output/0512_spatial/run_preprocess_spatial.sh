@@ -13,14 +13,14 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="/root/code/25-12/nicheformer/output"
-PROJECT_DIR="/root/code/25-12/nicheformer"
-VENV_DIR="$PROJECT_DIR/.venv"
+SCRIPT_DIR="/root/code/nicheformer/output/0512_spatial"
+PROJECT_DIR="/root/code/nicheformer"
+VENV_DIR="$PROJECT_DIR/.venv-cxg"
 
 # config file lives next to this script
 # CONFIG="$SCRIPT_DIR/preprocess_spatial_config.yaml"
 
-CONFIG="/root/code/25-12/nicheformer/output/preprocess_CosMaxCancerLiver_config.yaml"
+CONFIG="/root/code/nicheformer/output/0518/preprocess_perturb_map_config.yaml"
 
 # Use first argument as config path if it ends in .yaml or .yml,
 # otherwise use the default config.

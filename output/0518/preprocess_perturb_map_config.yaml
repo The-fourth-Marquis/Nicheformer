@@ -1,0 +1,155 @@
+# ============================================================================
+# Configuration for preprocessing perturbation map data (mouse CosMx spatial)
+# ============================================================================
+# Run via:
+#   uv run python preprocess_spatial.py --config-yaml preprocess_perturb_map_config.yaml
+# ============================================================================
+
+# ---------------------------------------------------------------------------
+# Input / Output paths
+# ---------------------------------------------------------------------------
+raw_h5ad: "/mnt/172/wh/25-12/spatial/raw/pertubmap/perturb_map_adata.h5ad"
+output_name: "visium_mouse_perturb_map.h5ad"
+output_dir: "/mnt/172/wh/25-12/spatial/preprocessed"
+
+# ---------------------------------------------------------------------------
+# Ontology constants — MOUSE dataset
+# ---------------------------------------------------------------------------
+assay: "EFO:0010961"      # Visium_SPATIAL
+sex: "PATO:0000384"             # not specified in the perturbation data
+organism: "NCBITaxon:10090"  # mouse
+organism_validator: "mouse"
+tissue: "UBERON:0002048"   # LUNG
+suspension_type: "na"      # spatial
+tissue_type: "tissue"
+
+# ---------------------------------------------------------------------------
+# Dataset metadata
+# ---------------------------------------------------------------------------
+dataset_title: "perturb_map"
+donor_id: "PerturbMouse"
+condition_id: "perturbation"
+
+# ---------------------------------------------------------------------------
+# Spatial coordinate column names in adata.obs
+# ---------------------------------------------------------------------------
+# The perturbation h5 has 'pos' array; after conversion these become 'x' and 'y'
+spatial_x_col: "x"
+spatial_y_col: "y"
+
+# ---------------------------------------------------------------------------
+# Library key — groups cells for spatial neighbor computation
+# ---------------------------------------------------------------------------
+# Use 'batch' (slide ID) since each slide is a separate tissue section
+library_key: "batch"
+
+# ---------------------------------------------------------------------------
+# Train/test split strategy
+# ---------------------------------------------------------------------------
+# Split by slide (batch) to prevent data leakage — cells from the same slide
+# share spatial context. The perturbation h5 has 4 slides.
+split_column: "batch"
+split_random_seed: 42
+split_test_frac: 0.1
+split_test_samples_frac: 0.25   # hold out 1 of 4 slides
+
+# ---------------------------------------------------------------------------
+# Niche composition radii — skip (not needed for perturbation prediction)
+# ---------------------------------------------------------------------------
+niche_radii: null
+
+# ---------------------------------------------------------------------------
+# Gene mapping — mouse gene symbols → Ensembl IDs
+# ---------------------------------------------------------------------------
+map_genes: true
+gene_mapping_species: "mouse"
+gene_symbol_var_col: null
+
+# ---------------------------------------------------------------------------
+# Cell type column — use perturbation label as proxy
+# ---------------------------------------------------------------------------
+cell_type_col: "perturbation"
+
+# ---------------------------------------------------------------------------
+# Niche label column — not available
+# ---------------------------------------------------------------------------
+niche_col: null
+
+# ---------------------------------------------------------------------------
+# Batch column
+# ---------------------------------------------------------------------------
+batch_col: "batch"
+
+# ---------------------------------------------------------------------------
+# Layer to use as raw counts
+# ---------------------------------------------------------------------------
+counts_layer: null
+
+# ---------------------------------------------------------------------------
+# Additional obs columns to preserve (perturbation labels, tissue type)
+# ---------------------------------------------------------------------------
+preserve_obs_cols:
+  - "perturbation"
+
+# ---------------------------------------------------------------------------
+# Assay name for obs['assay'] column
+# ---------------------------------------------------------------------------
+assay_name: "Visium"
+
+# ---------------------------------------------------------------------------
+# Model & gene ordering (post-validation)
+# ---------------------------------------------------------------------------
+model_h5ad: "/mnt/172/wh/25-12/nicheformer/data/model_means/model.h5ad"
+
+# ---------------------------------------------------------------------------
+# Technology-specific mean (post-validation)
+# ---------------------------------------------------------------------------
+technology_mean_path: "/mnt/172/wh/25-12/nicheformer/data/model_means/visium_mean_script.npy"
+technology_name: "Visium"
+
+# ---------------------------------------------------------------------------
+# Tokenization dictionaries (obs column → integer ID mapping)
+# ---------------------------------------------------------------------------
+tokenization_dicts:
+  modality_dict:
+    spatial: 4
+    dissociated: 3
+  specie_dict:
+    "Homo sapiens": 5
+    "human": 5
+    "Mus musculus": 6
+    "mouse": 6
+  technology_dict:
+    "merfish": 7
+    "MERFISH": 7
+    "cosmx": 8
+    "CosMx": 8
+    "NanoString digital spatial profiling": 8
+    "visium": 9
+    "Visium": 9
+    "10x 5' v2": 10
+    "10x 3' v3": 11
+    "10x 3' v2": 12
+    "10x 5' v1": 13
+    "10x 3' v1": 14
+    "10x 3' transcription profiling": 15
+    "10x transcription profiling": 15
+    "10x 5' transcription profiling": 16
+    "CITE-seq": 17
+    "Smart-seq v4": 18
+  author_cell_type_dict: null
+  niche_dict: null
+  region_dict: null
+
+# ---------------------------------------------------------------------------
+# Ready-to-tokenize output
+# ---------------------------------------------------------------------------
+ready_to_tokenize_dir: null
+tokenize_obs_cols:
+  - "assay"
+  - "organism"
+  - "nicheformer_split"
+  - "batch"
+  - "niche"
+  - "region"
+  - "author_cell_type"

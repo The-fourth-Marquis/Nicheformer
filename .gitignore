@@ -1,4 +1,8 @@
 /ckpt
 **/__pycache__
 /.venv
+/.venv-cxg
 **.csv
+**.png
+**/temp
+/.vscode

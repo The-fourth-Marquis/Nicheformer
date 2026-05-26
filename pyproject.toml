@@ -7,7 +7,7 @@ name = "nicheformer"
 version = "0.0.1"
 description = "Nicheformer: a foundation model for single-cell and spatial omics"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = {file = "LICENSE"}
 authors = [
     {name = "Anna Schaar"},
@@ -21,27 +21,45 @@ urls.Documentation = "https://nicheformer.readthedocs.io/"
 urls.Source = "https://github.com/theislab/nicheformer"
 urls.Home-page = "https://github.com/theislab/nicheformer"
 dependencies = [
-    "anndata",
+    "anndata<0.10.0",
     "session-info",
     "squidpy",
+    "zarr<3",
     "pyensembl==2.3.13",
     "torch>=2.5.1",
-    "pytorch-lightning>=2.0.0",
-    "numpy==1.26.4",
+    "pytorch-lightning>=1.9.5",
+    "numpy<2",
     "scikit-learn>=1.2.0",
     "scipy>=1.10.0",
-    "pandas==1.5.3",
+    "pandas",
     "pyyaml>=6.0",
     "typing-extensions>=4.0.0",
-    "merlin-core>=23.8.0",
+    "merlin-core<=23.8.0",
     "merlin-dataloader>=23.8.0",
     "dask>=2024.1.1",
     "dask-cuda>=24.2.0",
     "torchmetrics>=1.4.0",
     "torchvision>=0.18.0",
-    "wandb>=0.17.0",  
-    "numba>=0.59.0",
+    "wandb>=0.17.0",
+    "numba>=0.57.0,<0.61",
+    "scvi-tools",
+    "mygene",
+    "h5py",
     "cloudpickle>=3.0.0",
+    "ipykernel",
+    "jax==0.4.18",
+    "jaxlib==0.4.18",
+    "numpyro<0.14",
+    "flax<0.8",
+    "equinox<=0.11",
+    "lineax==0.0.4",
+    "rpy2<3.6",
+    "ete3",
+    "matplotlib==3.8.1",
+    "pertpy==0.6.0",
+    "cellxgene-schema<=4.0.1",
+    "scikit-misc>=0.3.0",
+    "plotnine>=0.12.0",
 ]
 
 [project.optional-dependencies]
@@ -157,3 +175,10 @@ skip = [
     "docs/references.md",
     "docs/notebooks/example.ipynb",
 ]
+
+[[tool.uv.index]]
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/"
+default = true
+
+[tool.uv.extra-build-dependencies]
+scikit-misc = ["numpy"]
