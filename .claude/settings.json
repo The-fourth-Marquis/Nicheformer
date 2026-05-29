@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/root/code/py38/bin/python -c ' *)",
+      "WebFetch(domain:www.ncbi.nlm.nih.gov)",
+      "Bash(# Check parent directory for metadata files *)",
+      "Read(//mnt/172/wh/25-12/spatial/raw/**)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl -sL \"https://zenodo.org/records/17959756\")",
+      "Bash(ls /tmp/ | grep -i spatial && find /tmp -name \"spatialperturbseq*\" -type d 2>/dev/null)",
+      "Read(//tmp/**)",
+      "Bash(curl -L -o spseq.zip \"https://zenodo.org/records/17959756/files/kimberle9/spatialperturbseq-v1.0.0.zip\")",
+      "WebFetch(domain:www.nature.com)",
+      "Bash(unzip -l /tmp/spseq.zip)",
+      "Bash(/root/code/py38/bin/python /root/code/nicheformer/output/0525/convert_gef_to_h5ad.py)",
+      "Bash(unzip -t /tmp/spseq.zip)",
+      "Bash(kill 54648)",
+      "Bash(awk '{print $10}')",
+      "Bash(awk '{print $2, $10}')",
+      "Bash(kill 57057)",
+      "Bash(gunzip -k GSM6858450_KD_guide_pooled.h5ad.gz)",
+      "Bash(ls -lh GSM6858450_KD_guide_pooled.h5ad)",
+      "Bash(apt-get install *)",
+      "Bash(pdftotext -layout -f 1 -l 15 /root/code/nicheformer/output/0527/PIIS0092867426005167.pdf -)",
+      "Bash(pdftotext -layout -f 5 -l 7 /root/code/nicheformer/output/0527/PIIS0092867426005167.pdf -)"
+    ]
+  }
+}

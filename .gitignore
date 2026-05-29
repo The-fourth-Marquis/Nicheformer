@@ -6,3 +6,7 @@
 **.png
 **/temp
 /.vscode
+**.pkl
+**.log
+**.h5
+**.pdf
